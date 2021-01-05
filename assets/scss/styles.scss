@@ -1,5 +1,10 @@
-$color: red;
+@import "body.scss";
 
-body {
-  background-color: $color;
+@keyframes sexy {
+  from {
+    color: red;
+  }
+  to {
+    color: blue;
+  }
 }
