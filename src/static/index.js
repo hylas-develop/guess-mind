@@ -1,6 +1,18 @@
 /* eslint-disable no-undef */
 const socket = io("/");
 
-socket.on("hello", () => console.log("Somebody said : Hello"));
+function sendMessage(message) {
+  socket.emit("newMessage", { message });
+  console.log(`You: ${message}`);
+}
 
-setTimeout(() => socket.emit("helloGuys"), 5000);
+function setNickname(nickname) {
+  socket.emit("setNickname", { nickname });
+}
+
+function handleMessageNotif(data) {
+  const { message, nickname } = data;
+  console.log(`${nickname} said : ${message}`);
+}
+
+socket.on("messageNotif", handleMessageNotif);
