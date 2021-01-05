@@ -22,12 +22,7 @@ const server = app.listen(PORT, handleListening);
 
 const io = socketIO(server);
 
-let sockets = [];
-
 io.on("connection", (socket) => {
-  sockets.push(socket.id);
+  // setTimeout(() => socket.broadcast.emit("hello"), 5000);
+  socket.on("helloGuys", () => console.log("client said hello."));
 });
-
-setInterval(() => {
-  console.log(sockets);
-}, 1000);
