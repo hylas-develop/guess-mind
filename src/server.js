@@ -1,6 +1,8 @@
 import express from "express";
 import logger from "morgan";
 import { join } from "path";
+import socketController from "./socketCotnroller";
+import events from "./events";
 import socketIO from "socket.io";
 
 const PORT = 4000;
@@ -12,7 +14,7 @@ app.use(logger("dev"));
 app.use(express.static(join(__dirname, "static")));
 
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", { events: JSON.stringify(events) });
 });
 
 const handleListening = () =>
@@ -23,14 +25,5 @@ const server = app.listen(PORT, handleListening);
 const io = socketIO(server);
 
 io.on("connection", (socket) => {
-  // setTimeout(() => socket.broadcast.emit("hello"), 5000);
-  socket.on("newMessage", ({ message }) => {
-    socket.broadcast.emit("messageNotif", {
-      message,
-      nickname: socket.nickname || "Anon",
-    });
-  });
-  socket.on("setNickname", ({ nickname }) => {
-    socket.nickname = nickname;
-  });
+  socketController(socket);
 });
