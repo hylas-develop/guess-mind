@@ -1,7 +1,12 @@
 /* eslint-disable no-param-reassign */
 import events from "./events";
+import { chooseWord } from "./word";
 
 let sockets = [];
+let inProgress = false;
+let word;
+
+const chooseLeader = () => sockets[Math.floor(Math.random() * sockets.length)];
 
 const socketController = (socket, io) => {
   const broadcast = (event, data) => {
@@ -13,6 +18,14 @@ const socketController = (socket, io) => {
   const sendPlayerUpdate = () => {
     superBroadcast(events.playerUpdate, { sockets });
   };
+  const startGame = () => {
+    if (inProgress === false) {
+      inProgress = true;
+    }
+    const leader = chooseLeader();
+    word = chooseWord();
+  };
+
   socket.on(events.setNickname, ({ nickname }) => {
     socket.nickname = nickname;
     sockets.push({ id: socket.id, points: 0, nickname });
