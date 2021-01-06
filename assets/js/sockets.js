@@ -1,4 +1,4 @@
-import { handleNewUser } from "./notifications";
+import { handleDisconnected, handleNewUser } from "./notifications";
 
 let socket = null;
 // eslint-disable-next-line import/prefer-default-export
@@ -12,4 +12,5 @@ export const initSocket = (aSocket) => {
   const { events } = window;
   updateSocket(aSocket);
   aSocket.on(events.newUser, handleNewUser);
+  aSocket.on(events.disconnected, handleDisconnected);
 };
