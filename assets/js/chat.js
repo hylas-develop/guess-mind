@@ -21,6 +21,9 @@ const handleSendMsg = (event) => {
   getSocket().emit(window.events.sendMsg, { message: value });
 };
 
+export const disableChat = () => (sendMsg.style.display = "none");
+export const enableChat = () => (sendMsg.style.display = "flex");
+
 export const handleNewMessage = ({ message, nickname }) => {
   appendMsg(message, nickname);
 };

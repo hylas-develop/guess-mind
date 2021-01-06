@@ -1,3 +1,4 @@
+import { disableChat, enableChat } from "./chat";
 import {
   disableCanvas,
   enableCanvas,
@@ -22,7 +23,10 @@ const setNotifs = (text) => {
   notifs.innerHTML = text;
 };
 
-export const handlePlayerUpdate = ({ sockets }) => addPlayers(sockets);
+export const handlePlayerUpdate = ({ sockets }) => {
+  console.log(sockets);
+  addPlayers(sockets);
+};
 export const handleGameStarted = () => {
   console.log("Game Started Received");
   disableCanvas();
@@ -31,6 +35,7 @@ export const handleGameStarted = () => {
 };
 export const handleLeaderNotif = ({ word }) => {
   console.log("Leader Notif Received");
+  disableChat();
   enableCanvas();
   showCanvasControls();
   setNotifs(`You are the leader, paint: ${word}`);
@@ -41,4 +46,9 @@ export const handleGameEnded = () => {
   resetCanvas();
   hideCanvasControls();
   disableCanvas();
+  enableChat();
+};
+
+export const handleGameStarting = () => {
+  setNotifs("Game will start soon.");
 };

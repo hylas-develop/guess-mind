@@ -126,11 +126,11 @@ export const enableCanvas = () => {
 };
 
 export const hideCanvasControls = () => {
-  controls.style.opacity = 0;
+  controls.style.display = "none";
 };
 
 export const showCanvasControls = () => {
-  controls.style.opacity = 1;
+  controls.style.display = "flex";
 };
 
 export const resetCanvas = () => {
