@@ -12,6 +12,7 @@ const login = (nickname) => {
   // eslint-disable-next-line no-undef
   const socket = io("/");
   socket.emit(window.events.setNickname, { nickname });
+  console.log("Send login message.");
   initSocket(socket);
 };
 

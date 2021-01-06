@@ -1,7 +1,12 @@
 import { handleNewMessage } from "./chat";
 import { handleDisconnected, handleNewUser } from "./notifications";
 import { handleBeganPath, handleFilled, handleStrokedPath } from "./paint";
-import { handlePlayerUpdate } from "./player";
+import {
+  handleGameStarted,
+  handleLeaderNotif,
+  handlePlayerUpdate,
+  handleGameEnded,
+} from "./player";
 
 let socket = null;
 // eslint-disable-next-line import/prefer-default-export
@@ -17,4 +22,7 @@ export const initSocket = (aSocket) => {
   socket.on(events.strokedPath, handleStrokedPath);
   socket.on(events.filled, handleFilled);
   socket.on(events.playerUpdate, handlePlayerUpdate);
+  socket.on(events.gameStarted, handleGameStarted);
+  socket.on(events.leaderNotif, handleLeaderNotif);
+  socket.on(events.gameEnded, handleGameEnded);
 };
