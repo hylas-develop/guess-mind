@@ -1,10 +1,12 @@
-const notifications = document.getElementById("jsNotifications");
+const body = document.querySelector("body");
 
 const fireNotification = (text, color) => {
   const notification = document.createElement("div");
   notification.innerText = text;
   notification.style.backgroundColor = color;
-  notifications.appendChild(notification);
+  notification.className = "notification";
+  body.appendChild(notification);
+  setTimeout(() => body.removeChild(notification), 5000);
 };
 // eslint-disable-next-line import/prefer-default-export
 export const handleNewUser = ({ nickname }) => {
