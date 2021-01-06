@@ -1,9 +1,9 @@
 import express from "express";
 import logger from "morgan";
 import { join } from "path";
+import socketIO from "socket.io";
 import socketController from "./socketCotnroller";
 import events from "./events";
-import socketIO from "socket.io";
 
 const PORT = 4000;
 const app = express();
